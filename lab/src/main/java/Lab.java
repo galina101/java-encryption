@@ -1,42 +1,28 @@
-import java.net.URL;
+import java.util.Arrays;
 
 public class Lab {
     /**
-     * TODO: the method should return true if the provided String represents a valid url, and false if it doesn't.
-     * Valid URLs will follow the pattern https://website.extension, potentially with path parameters such as
-     * https://website.extension/path, and potentially with a query param such as
-     * https://website.extension/path?var=abc, or multiple query params, such as
-     * https://website.extension/path?var1=abc&var2=xyz
+     * An anagram is a word that is the reordering of another word's letters.
+     * Letter counts must be exact.
      *
-     * A URL should always start with its protocol, https://
-     * A URL must have any extension (such as .com)
-     * The URL path should follow the extension, defined by a single slash /
-     * The query parameters follow the path, defined by a question mark ?
-     *
-     * Tip: some string methods, such as split, will parse regex. "." and "?" are technically regex
-     * statements, but you can break out of regex in those cases using "\\." and "\\?"
-     *
-     * @return
+     * @param s1 a word.
+     * @param s2 another word, possibly an anagram of s1.
+     * @return True if s2 is an anagram of s1, false otherwise.
      */
-    public boolean validate(String url){
+    public boolean check(String s1, String s2){
 
-        //URL has to start with "https://"
-        if (!url.startsWith("https://")){
+        if(s1.length() != s2.length()){
             return false;
         }
-        //URL without an extension is rejected
-        if(!url.matches("https://[^/]+\\.[a-zA-Z]+.*")){
-            return false;
-        }
-        //URL that attempts to establish a path after query parameters is rejected
-        if (url.matches(".+\\?.*/.*")){
-            return false;
-        }
-        try{
-            new URL(url);
-            return true;
-        } catch (Exception e){
-            return false;
-        }
+
+        char[] s1Array = s1.toCharArray();
+        char[] s2Array = s2.toCharArray();
+
+        Arrays.sort(s1Array);
+        Arrays.sort(s2Array);
+
+
+        return Arrays.equals(s1Array, s2Array);
     }
+
 }
