@@ -1,19 +1,25 @@
+import java.util.Arrays;
+
 public class Lab {
     /**
-     * @param nums a list of ints.
-     * @return a list of ints that is in the reversed order of nums.
+     * @param arr an array of ints.
+     * @return the second highest value of arr.
      */
-    public int[] reverse(int[] nums){
-
-
-        int[] reversedArray = new int[nums.length];
-        int j = 0;
-        for (int i = nums.length - 1; i >= 0; i--) {
-            reversedArray[j] = nums[i];
-            j++;
+    public int getValue(int[] arr) {
+        if (arr.length < 2) {
+            throw new IllegalArgumentException("Array length must be at least 2");
         }
+        Arrays.sort(arr);
 
+        //highest is the last element in the array
+        int highest = arr[arr.length - 1];
 
-        return reversedArray;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] != highest) {
+                return arr[i];
+            }
+        }
+        throw new IllegalArgumentException(("Array must contain at least two unique elements."));
+
     }
 }

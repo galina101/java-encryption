@@ -1,26 +1,41 @@
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class LabTest {
-    Lab ra = new Lab();
-
-    /**
-     * The reverse of {1, 2, 3, 4} is {4, 3, 2, 1}.
-     */
-    @Test
-    public void ReverseArrayTest(){
-        int[] nums = {1, 2, 3, 4};
-        int[] target = {4, 3, 2, 1};
-        Assert.assertArrayEquals(target, ra.reverse(nums));
+    public static Lab shv;
+    @BeforeClass
+    public static void setUp(){
+        shv = new Lab();
     }
 
     /**
-     * The reverse of {6, 4, 3, 0} is {0, 3, 4, 6}.
+     * The second highest value of {0, 1, 2, 3, 4} is 3.
      */
     @Test
-    public void ReverseArrayTest2(){
-        int[] nums = {6, 4, 3, 0};
-        int[] target = {0, 3, 4, 6};
-        Assert.assertArrayEquals(target, ra.reverse(nums));
+    public void shvTest1(){
+        int[] input = {0, 1, 2, 3, 4};
+        int expected = 3;
+        Assert.assertEquals(shv.getValue(input), expected);
+    }
+
+    /**
+     * The second highest value of {0, 5, 2, 3, 4} is 4.
+     */
+    @Test
+    public void shvTest2(){
+        int[] input = {0, 5, 2, 3, 4};
+        int expected = 4;
+        Assert.assertEquals(shv.getValue(input), expected);
+    }
+
+    /**
+     * The second highest value of {0, 0, 1, 1, 2, 2, 3, 3} is 2.
+     */
+    @Test
+    public void shvTest3(){
+        int[] input = {0, 0, 1, 1, 2, 2, 3, 3};
+        int expected = 2;
+        Assert.assertEquals(shv.getValue(input), expected);
     }
 }
