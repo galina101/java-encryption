@@ -1,41 +1,83 @@
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class LabTest {
-    public static Lab shv;
-    @BeforeClass
-    public static void setUp(){
-        shv = new Lab();
+    Lab lab;
+    @Before
+    public void setUp(){
+        lab = new Lab();
     }
-
     /**
-     * The second highest value of {0, 1, 2, 3, 4} is 3.
+     * Message should not contain any 3-letter combinations from the original message.
      */
     @Test
-    public void shvTest1(){
-        int[] input = {0, 1, 2, 3, 4};
-        int expected = 3;
-        Assert.assertEquals(shv.getValue(input), expected);
+    public void encryptTest1(){
+        String original = "encrypt";
+        String encrypted = lab.encrypt(original);
+        for(int i = 0; i < original.length()-3; i++){
+            String fragment = original.substring(i, i+3);
+            if(encrypted.contains(fragment)){
+                Assert.fail();
+            }
+        }
     }
-
     /**
-     * The second highest value of {0, 5, 2, 3, 4} is 4.
+     * Message should not contain any 3-letter combinations from the original message.
      */
     @Test
-    public void shvTest2(){
-        int[] input = {0, 5, 2, 3, 4};
-        int expected = 4;
-        Assert.assertEquals(shv.getValue(input), expected);
+    public void encryptTest2(){
+        String original = "this message is encrypted";
+        String encrypted = lab.encrypt(original);
+        for(int i = 0; i < original.length()-3; i++){
+            String fragment = original.substring(i, i+3);
+            if(encrypted.contains(fragment)){
+                Assert.fail();
+            }
+        }
     }
-
     /**
-     * The second highest value of {0, 0, 1, 1, 2, 2, 3, 3} is 2.
+     * Message should not contain any 3-letter combinations from the original message.
      */
     @Test
-    public void shvTest3(){
-        int[] input = {0, 0, 1, 1, 2, 2, 3, 3};
-        int expected = 2;
-        Assert.assertEquals(shv.getValue(input), expected);
+    public void encryptTest3(){
+        String original = "teds secret password";
+        String encrypted = lab.encrypt(original);
+        for(int i = 0; i < original.length()-3; i++){
+            String fragment = original.substring(i, i+3);
+            if(encrypted.contains(fragment)){
+                Assert.fail();
+            }
+        }
+    }
+    /**
+     * Message should decrypt to the original message
+     */
+    @Test
+    public void decryptTest1(){
+        String original = "encrypt";
+        String encrypted = lab.encrypt(original);
+        String decrypted = lab.decrypt(encrypted);
+        Assert.assertEquals(original, decrypted);
+    }
+    /**
+     * Message should decrypt to the original message
+     */
+    @Test
+    public void decryptTest2(){
+        String original = "this message is encrypted";
+        String encrypted = lab.encrypt(original);
+        String decrypted = lab.decrypt(encrypted);
+        Assert.assertEquals(original, decrypted);
+    }
+    /**
+     * Message should decrypt to the original message
+     */
+    @Test
+    public void decryptTest3(){
+        String original = "teds secret password";
+        String encrypted = lab.encrypt(original);
+        String decrypted = lab.decrypt(encrypted);
+        Assert.assertEquals(original, decrypted);
     }
 }
